@@ -288,54 +288,40 @@ There is considerable value to systems and synthetic biology  in creating reprod
 % FIRST DRAFT OF NEW INTRODUCTION Sept 11
 % --------------------------------------------------
 
-{\color{red}
-\noindent
-Those sections marked in color, could the respective author remove
-those if the issues have been addressed.}
 \medskip
 
-The scientific method relies heavily on {\bf reproducibility}, the ability of independent investigators to obtain the same results using the same reported experimental procedure.  Unfortunately, a significant portion of the biomedical research is not reproducible, as shown by a number of recent studies~\cite{prinz2011believe,mobley2013survey}.  Poor reproducibility has been attributed to several factors including the increasing complexity of research, the lack of standard formats for describing research, the lack of repositories for storing specialized data, an entrenched reward system that favors quantity over quality~\cite{quan2017publish}, and significantly, the lack of emphasis on proper documentation~\cite{peng2011reproducible}.
-
+The scientific method relies heavily on {\bf reproducibility}, the ability of independent investigators to obtain the same results using the same reported experimental procedure.  Unfortunately, a significant portion of the biomedical research is not reproducible, as shown by a number of recent studies~\cite{prinz2011believe,mobley2013survey}.
+% Poor reproducibility has been attributed to several factors including the increasing complexity of research, the lack of standard formats for describing research, the lack of repositories for storing specialized data, an entrenched reward system that favors quantity over quality~\cite{quan2017publish}, and significantly, the lack of emphasis on proper documentation~\cite{peng2011reproducible}.
 Much of the focus on poor reproducibility has been on wet lab experiments. However, reproducibility is also an issue in computational studies~\cite{peng2016moving,medley2016guidelines,mcdougal2016reproducibility,waltemath2016modeling}.  Efforts led by Biomodels, JWS Online~\cite{olivier2004web} and the CellML model repositories, where hundreds of published models have been curated, have shown that over 95\% of the models are not reproducible (personal communication). Most often, errors are introduced when the model is transcribed from the private version to the final publication.  These errors include wrong units, incorrect values for parameters, mistyped mathematical equations, missing initial conditions and so on. Sometimes other issues arise as well, such as reliance on particular software versions (which may no longer be available) or the need for special hardware implementations.
 % For large scale simulations that involve the use of supercomputers and extremely large datasets, it may simply be impractical to attempt to reproduce the results.
 
 Multiscale dynamical modeling requires the ability to build larger, more comprehensive, and more complex models of biological systems such as the \textit{Mycoplasma genitalium} whole--cell model~\cite{karr2012whole} and the central metabolism of \textit{E. coli}~\cite{millard2017metabolic}. These models are often composed of many submodels, which must be individually developed and validated. Without the ability to reuse existing models, constructing larger models becomes impractical. Poor reproducibility prevents previous models from being reused. Therefore, ensuring that studies are reproducible is critical for continued progress.
 
-Computational studies address the problem of reproducibility in a number of ways. The easiest is to provide the computational experiment in the form of a virtual machine~\cite{piccolo2016tools}. That is, a snapshot of the researcher's computer is provided so that every aspect of the original work is precisely replicated. This form of reproducibility is the weakest kind and is often simply called repeatability~\cite{drummond2009replicability}. While repeatability is useful, particularly for disseminating details of a computational procedural, it does not address the real challenge of reproducibility--reproducing a computational experiment by {\em independent} investigators. Reproducibility is not however an either/or decision but can range in degrees such as the categories shown below:
+In recognition of this problem, \textbf{reproducibility} has become a central focus of scientific software \cite{peng2011reproducible,sandve2013ten}. However, many software packages which attempt to address the problem of reproducibility actually address what we term \textit{repeatability}, which refers to the ability to recreate a previously derived result using the same software and input data. While this is a useful ability, it does not address challenges such as future--proofing, where a researcher might want to recreate a result decades into the future running on different hardware and a different operating system, or other challenges such as incorporating a previously published model into a larger model. For example, many models are distributed as source code containing a realization of the model as a set of numerical simulation routines, and while this does facilitate repeatability by allowing the same results to be generated again, it does not solve the concerns of reuse, expansion of existing models, and new hypothesis testing. In order to address these problems, we adopt a more general definition of reproducibility.
 
-\begin{itemize}
-\item \textbf{Computational repeatability:} A result can be replicated with the same model, data, and software.
-\item \textbf{Algorithmic reproducibility:} A result can be replicated with the same model and data but different software that implements the same algorithm.
-\item \textbf{Scientific reproducibility:} A result can be replicated with the same model and data but a different algorithm.
-\item \textbf{Empirical reproducibility:} A result can be replicated with independent model, data, and algorithms.
-\end{itemize}
-
-We argue that all categories of reproducibility have two requirements: (a) \textit{transparency}, the ability to inspect the details of the computational experiment; and (b) \textit{exchangeability}, the ability to represent the computational experiment in a way that other investigators can recreate the experiment in its full detail.
+To formalize this definition, we argue that all categories of reproducibility have two requirements: (a) \textit{transparency}, the ability to inspect the details of the computational experiment; and (b) \textit{exchangeability}, the ability to represent the computational experiment in a way that other investigators can recreate the experiment in its full detail.
 \textbf{Transparency} refers to the ability to represent the computational experiment so that the individual steps, assumptions, and data sources are clear. Transparency enables other researchers to understand the rationale of a procedure. The critical requirement of transparency is not merely having access to all original software, source code, data, and procedures used to generate a previous result, but also making explicit all assumptions and rationale used to design a model or analysis and conveying this thought process in a lucid way. For example, with transparent model building, it should be possible to answer questions such as ``Where did these parameter values come from?,''  ``What is the identify of each chemical species?," ''``Why does this part of the model use lumped kinetics?,'' or ``What was the reason for including only certain interactions?'' without the help of the original authors.
-% * <joseph.hellerstein@gmail.com> 2017-09-12T20:19:07.514Z:
-%
-% I really like the distinction made between transparency and exchangeability that the former is about human readability while the latter is about being transferrable between different modeling environments.
-%
-% ^ <joseph.hellerstein@gmail.com> 2017-09-22T23:35:24.803Z.
-% transparency isn't something that the software can impose, but it can make it easier or harder
 
 \textbf{Exchangeability} refers to the ability to share data, models, and software with other researchers. For this reason data, models, and software should be encoded in open, standardized formats can be more easily used by other researchers  In contrast to transparency, which allows models and simulations to be read and understood by human beings, exchangeability refers to the ability to exchange models and simulations between different software implementations. Many models and simulations are distributed as source code. However, this alone does not guarantee exchangeability if the source code is tied to a particular implementation. In order to achieve exchangeability, it is necessary to separate the \textit{specification} of a model and simulation from its \textit{implementation}. There are a number of well developed open, community--developed standards that can be used to encode specifications, including the Systems Biology Markup Language (SBML) \cite{hucka2003systems,bornstein2008libsbml} and CellML~\cite{cuellar2003overview}, which encode dynamical models, the Simulation Experiment Description Markup Language (SED-ML) \cite{waltemath2011reproducible}, which encodes simulations, NeuroML \cite{gleeson2010neuroml} which encodes data--driven neural models, and the Synthetic Biology Open Language (SBOL) \cite{bartley2015synthetic,galdzicki2014synthetic}, which encodes sequence and functional information of genetic circuits. In turn, various software systems exist which provide an implementation of these standards. For example, a variety of SBML simulators (see \cite{sauro2008standards} % alves2006tools
 for a review) exist which perform the low--level tasks associated with loading and simulating a SBML model, such as constructing and solving differential equations from the model specification, locating steady states, and plotting simulations. Furthermore, exchangeability helps not only to future--proof models and simulations, but also to identify idiosyncrasies in particular software implementations by comparing results \cite{bergmann2008comparing}.
 
-The same model may be implemented in many different ways. This is the reason we have chosen to define reproducibility in terms of the ability to run a given model in a variety of software systems, which we believe is a stronger criterion than merely rerunning a specific implementation of the model. For the same reason, it is also necessary to use open, standard formats for encoding simulation data. Currently, many models are encoded as SBML only, without a simulation component such as SED--ML (See later for details). This is problematic because it requires manual user intervention in order to faithfully reproduce the model's dynamics, meaning that model repositories such as BioModels \cite{le2006biomodels} cannot automatically be mined for dynamical information. Fig \ref{fig:mistakes} shows some common mistakes in attempting to simulate a SBML model. Users can easily end up using incorrect values for the timescale or simulation algorithm parameters such as tolerances, leading to several cycles of tuning the simulation setup. Also, SBML does not specify whether a model should be simulated using a deterministic or stochastic solver, leading to further ambiguity.
+In order to be exchangeable and transparent, a computational experiment must be encoded in a standard format which separates its specification (i.e. parameters, processes, and kinetics) from its implementation (the numerical methods used to simulate the model). Currently, this is achieved by encoding the specification of models using the SBML or CellML standards. However, these standards do not describe how to simulate the model. This is problematic because it represents a required piece of information to reproduce the model's dynamics. As a result, model repositories such as BioModels \cite{le2006biomodels} cannot automatically be mined for dynamical information. Fig \ref{fig:mistakes} shows some common mistakes in attempting to simulate a SBML model. Users can easily end up using incorrect values for the timescale or simulation algorithm parameters such as tolerances, leading to several cycles of tuning the simulation setup. Also, SBML does not specify whether a model should be simulated using a deterministic or stochastic solver, leading to further ambiguity.
+
+% However, current standards for describing models are not human--readable, and therefore an authoring tool is required which allows users to edit the model. This authoring tool should satisfy five requirements:
 
 \begin{figure}
   \includegraphics[width=\textwidth]{elowitz-simulations.pdf}
   \caption{ Common mistakes in simulating a SBML model. This figure contains four different simulations of the same SBML model: the repressilator circuit \cite{elowitz2000synthetic} downloaded from the BioModels database (BIOMD0000000012). (A) shows the correct simulation with the intended timescale. (B) uses a timescale which is too short to reveal the oscillatory dynamics produced by the model. (C) uses softer tolerance values for the ODE integrator, causing an inaccurate solution. Most SBML simulators, including our software, use very stringent default tolerances in order to faithfully simulate even very sensitive models. However, reducing the stringency yields increased simulation performance, so tolerances should ideally be set on a per--model basis. Finally, (D) uses a stochastic solver based on the Gillespie method \cite{gillespie1977exact}, an easy mistake since SBML does not specify the intended solver. These mistakes can be avoided by providing a simulation experiment description in SED-ML specifying duration, time points, tolerance parameters, and simulation algorithm for the simulation. }
   \label{fig:mistakes}
 \end{figure}
-
-In order to be reproducible, therefore, a computational experiment must be encoded in a standard format which separates its specification from its implementation. However, the standards described above are not human--readable, and therefore an authoring tool is required which allows users to edit the model. This authoring tool should satisfy five requirements:
 % * <joseph.hellerstein@gmail.com> 2017-09-12T20:20:41.650Z:
 %
 % I'd use the term "computational experiment" here since we want to encompass both the model and the simulations.
 %
 % ^ <joseph.hellerstein@gmail.com> 2017-09-22T23:36:08.639Z.
+
+To address these problems, the SED--ML standard was developed to encode the information required to simulate models. SED--ML simulations and SBML / CellML models can be packaged together using COMBINE archives \cite{bergmann2014combine} in order to facilitate exchanging models and simulations between software tools. However, authoring tools for SED--ML and COMBINE archives are few in number \cite{bergmann2017sed,scharm2014combinearchiveweb} and require technical knowledge of SED--ML and COMBINE archives, preventing these standards from being used by the modeling community at large. Therefore an authoring tool is required with an emphasis on allowing a wider range of users to create and edit COMBINE archives containing both models and simulations. The authoring tool should satisfy five requirements:
+
 \begin{enumerate}
 \item It should represent the models or simulation specifications in a human--readable form
 \item It should allow the user to easily edit this human--readable representation
@@ -352,9 +338,9 @@ To address these requirements we have developed a Python Jupyter notebook softwa
   \label{fig:workflow}
 \end{figure}
 
-The concept of literate programming was introduced by Donald Knuth~\cite{knuth84literate} and refers to the idea of presenting fragmentary program logic in a human readable form intermixed with commentary. The aim is to force programmers to explicitly state their decisions behind the logic they employ in the program and to make software easier to understand. This also means there is no need for a separate set of documentation files since everything is now included in the source code itself. The code itself becomes becomes a human readable document of the work. In modern parlance this representation is called a notebook. Historically, MathCad~\cite{MathCAD} was probably one of the first applications to use the idea of notebook style programming on a large scale. Subsequent use by Mathematica~\cite{wolfram1996mathematica} and Maple~\cite{maple} made the concept more popular. Since then open source efforts such as Jupyter~\cite{ragan2014jupyter} have implemented notebook style programming for the popular programming languages Python and R. Jupyter has gained considerable popularity among certain scientific communities such as data science. A recent article highlights the advantages of notebook style programming~\cite{shen2014interactive} for scientific programming. For scientific research, a literate notebook is often preferable to a collection of poorly documented scripts or source code files.
+% The concept of literate programming was introduced by Donald Knuth~\cite{knuth84literate} and refers to the idea of presenting fragmentary program logic in a human readable form intermixed with commentary. The aim is to force programmers to explicitly state their decisions behind the logic they employ in the program and to make software easier to understand. This also means there is no need for a separate set of documentation files since everything is now included in the source code itself. The code itself becomes becomes a human readable document of the work. In modern parlance this representation is called a notebook. Historically, MathCad~\cite{MathCAD} was probably one of the first applications to use the idea of notebook style programming on a large scale. Subsequent use by Mathematica~\cite{wolfram1996mathematica} and Maple~\cite{maple} made the concept more popular. Since then open source efforts such as Jupyter~\cite{ragan2014jupyter} have implemented notebook style programming for the popular programming languages Python and R. Jupyter has gained considerable popularity among certain scientific communities such as data science. A recent article highlights the advantages of notebook style programming~\cite{shen2014interactive} for scientific programming. For scientific research, a literate notebook is often preferable to a collection of poorly documented scripts or source code files.
 
-Using Tellurium, we have extended the notebook concept to support community standards in systems biology. Whereas regular notebooks contain code and narrative cells, Tellurium adds a third cell type for representing models and simulations encoded as standards. Tellurium's notebook interface is shown in Fig \ref{fig:interface}.
+Using Tellurium, we have extended the literate notebook concept used by tools like Jupyter \cite{ragan2014jupyter} to support community standards in systems biology. Whereas Jupyter notebooks contain code and narrative cells, Tellurium adds a third cell type for representing models and simulations encoded as standards. Tellurium's notebook interface is shown in Fig \ref{fig:interface}.
 
 \begin{figure}
   \includegraphics[width=\textwidth]{fig-interface.png}
@@ -362,17 +348,10 @@ Using Tellurium, we have extended the notebook concept to support community stan
   \label{fig:interface}
 \end{figure}
 
-For exchanging models, Tellurium supports importing and exporting via the SBML format. SBML was originally conceived to allow encoding of ordinary differential equation (ODE) and stochastic models of biological reaction networks~\cite{hucka2003systems}, but has since been expanded to cover a number of other modeling paradigms via extension \textit{packages}, which allow encoding specialized information in a SBML document while still allowing the core features of the model to be exchanged among software tools which do not necessarily support particular packages. SBML packages include constraint--based models via the Flux Balance Constraints package~\cite{sbmlfbc}, rule-based models via the Multistate / Multicomponent package~\cite{sbmlmulti}, spatial models via the Spatial package \cite{sbmlspatial}, and other packages for various specialized applications. Since its inception, SBML has been used to encode hundreds of models in the BioModels~\cite{le2006biomodels,li2010biomodels} and JWS Online~\cite{olivier2004web} repositories.
+Tellurium supports embedding human--readable representations of SBML \cite{smith2009antimony} and SED--ML \cite{choi2016phrased} directly in cells. These cells can be exported as standard COMBINE archives which are readable by other tools. We refer to this human--readable representation as \textit{inline OMEX} (after Open Modeling and EXchange, the encoding standard of COMBINE archives).
+Inline OMEX cells operate in much the same way as code cells, i.e. they have syntax highlighting and are executable. Executing an in-line OMEX cell runs all SED--ML simulations in the cell, producing any plots or reports declared in the SED--ML. A major advantage of this approach is that it offers a means of authoring transparent, exchangeable modeling studies without requiring technical knowledge of standards.
 
-For exchanging simulations, Tellurium uses the SED--ML format. SED-ML provides a way to specify what simulations should be performed on a model using a set of predefined simulation for timecourse and steady state solutions. SED--ML allows specifying the algorithm and parameters of a simulation in an unambiguous way using the KiSAO ontology \cite{courtot2011controlled}.
-
-SED--ML files describe simulations only and must refer to external SBML or CellML files in order to specify which models these simulations should be run on. This is problematic because it requires users to ensure that SBML and SED--ML files are always exchanged together, and that the versions of the respective files are always in sync. To address this problem, the COMBINE archive standard was created. COMBINE archives are machine--readable zip files which allow software tools to automatically extract standards such as SBML and SED--ML in the archive. COMBINE archives also support other standards such as NeuroML and SBOL. However, these formats are beyond the current scope of Tellurium. Due to the difficulty in exchanging multiple related SBML and SED--ML files, we recommend tool developers use COMBINE archives as a medium for exchanging models and simulations, and Tellurium is designed to facilitate this.
-
-
-Tellurium supports embedding human--readable representations of SBML \cite{smith2009antimony} and SED--ML \cite{choi2016phrased} directly in cells. This human readable syntax builds on our Antimony and PhraSEDML projects, which are libraries that can interconvert between human--readable representations of SBML and SED--ML respectively, and are described elsewhere \cite{smith2009antimony,choi2016phrased}. To support COMBINE archives containing both models and simulations, we have developed a human--readable representation of the COMBINE archive, which we term the in-line OMEX format (derived from the Open Modeling and EXchange format, which refers to the encoding standard of COMBINE archives). These cells operate in much the same way as code cells, i.e. they have syntax highlighting and are executable. For example, executing an in-line OMEX cell runs all SED--ML simulations in the cell. However, these cells also allow fluid editing of the models and simulations contained in the COMBINE archive.
-%This approach facilitates both transparency, as a result of the notebook narrative, and exchangeability, as a result of Tellurium's fluid standards support.
-
-Tellurium is designed as a Python environment for dynamical modeling, similar to other such platforms \cite{olivier2005modelling}. However, Tellurium has been designed to offer better support for exchanging models and simulations using the COMBINE archive format \cite{bergmann2014combine}. Tellurium also supports easily editing and expanding notebook app as well as a collection of Python packages for dynamical modeling, including the high performance libRoadRunner simulator~\cite{somogyi2015libroadrunner}, libSBML~\cite{bornstein2008libsbml}, libSEDML~\cite{waltemath2011reproducible}, and others. Tellurium can also be used through other front--end interfaces such as Spyder (which we also distribute), and as a collection of a Python packages. In this paper, we refer to the notebook version of Tellurium. Tellurium supports exporting to regular Jupyter notebooks. These notebooks can be read by a Jupyter viewer with the necessary Python packages installed. However, manually setting up a Python environment containing a large number of required packages is often challenging and cumbersome for non--developers. Therefore, we provide Tellurium as an app available for Windows, Mac, and Linux. We also provide PyPI packages for developers who wish to integrate Tellurium in their own projects.
+As a whole, Tellurium is a Python environment for dynamical modeling, similar to other platforms \cite{olivier2005modelling}. However, Tellurium has been designed to offer better support for exchangeability, via COMBINE archive support, and transparency, via literate notebooks. Tellurium can also be used through several front--end interfaces, and as a collection of a Python packages. In this paper, we refer to the notebook version of Tellurium. Tellurium supports exporting to regular Jupyter notebooks. These notebooks can be read by a Jupyter viewer with the necessary Python packages installed. However, manually setting up a Python environment containing a large number of required packages is often challenging and cumbersome for non--developers. Therefore, we provide Tellurium as an app available for Windows, Mac, and Linux. We also provide PyPI packages for developers who wish to integrate Tellurium in their own projects.
 
 % need to find a home for this
 % To facilitate (3), it is convenient to package related standards together. For example, SED--ML specifies how to simulate a SBML or CellML model, and must always be accompanied by the corresponding SBML or CellML file. The COMBINE archive \cite{bergmann2014combine} was created for this purpose, and helps aid reproducibility by preventing mismatches between different versions of models and simulations. We recommend all software which supports SED--ML also support COMBINE archives, which is made easier by a library implementation with multiple language bindings \cite{bergmann_frank_t_2016_154158}.
@@ -474,149 +453,152 @@ In summary, using Tellurium's editing capabilities, we have created an extensive
 
 % Next, we will study the effect of the nuclear volume fraction (Fig \ref{fig:calzone-e}. This parameter essentially specifies the fraction of the volume of the cell which represents the nuclear ``compartment.'' Having a smaller fraction means that even after several divisions, the nucleus will still only occupy a small fraction of the total cellular volume. A smaller nucleus can continue dividing without depleting the cell's supply of CycB, whereas a larger nucleus depletes the CycB more rapidly an cannot sustain as many divisions. Therefore, the nuclear volume fraction is essential for determining the ``magic'' number of 13 divisions.
 
-\subsection*{Interoperability Concerns \& Test Cases}
-
-In order to achieve the exchangeability requirement of reproducibility, broad standards compliance is necessary. A small number of test cases, such as the first two case studies, is not sufficient to ensure interoperability with other software.
-%Due to the recent introduction of the COMBINE archive specification \cite{bergmann2014combine} and supporting libraries \cite{bergmann_frank_t_2016_154158}, many tools do not yet support the standard.
-%Unfortunately, there are few examples of COMBINE archives.
-
-We have constructed a COMBINE test suite to assess the compliance of tools with standards related to COMBINE archives. The test suite draws archives from a wide range of sources: publications \cite{bergmann2014combine,scharmf1000}, other tools (e.g. the SED--ML Web Tools \cite{bergmann2017sed}), the SBML Test Suite encoded as COMBINE archives, and archives developed by our group. The COMBINE test suite contains archives ranging from basic examples to advanced usage of the SED--ML standard. \textbf{To verify exchangeability, we have manually tested importing these archives into our software and also into the SED--ML Web Tools. The SBML test cases were too numerous to test in this way, so a subset of archives were tested with the SED--ML Web Tools whereas the full set of archives was tested with Tellurium using a Tellurium notebook \cite{sbmltsnotebook}.}
-
-%These tests help ensure that is broadly standards compliant. The tests may also help others to implement support for COMBINE archives. Therefore, we have collected the extensive set of COMBINE archives used for our internal testing in a repository. This repository all case studies used in this manuscript. In order to aid other tools in implementing COMBINE archive support, the test suite contains archives ranging from basic examples to advanced usage of the SED--ML standard. The test suite a combination of cases generated by us and cases derived from other tools. The test cases are available at \texttt{https://github.com/0u812/tellurium-combine-archive-test-cases} and is derived from the following sources. %All of these archives can be imported by Tellurium.
-\textbf{The Tellurium COMBINE archive test suite is available online at GitHub \cite{catests} and is structured as follows:}
-
-% the way tellurium addresses the requirements, acquire model, experiment
-% now that we know where m appears, lets explore different values of m
-% want to modify m, tellurium supports your authoring, show you can run it, produce simulation
-% new study, can share with other tools
-
-{\color{orange} MK: links to notebooks missing (this should be included as supplementary file, or via link to repository. The examples also should be packaged in tellurium.}
-
-\begin{itemize}
-\item A set of models and SED--ML simulations of increasing complexity, in order to facilitate incremental support of the standard (4 archives, shown in Fig \ref{fig:inlineomex}).
-\item A selection of BioModels converted to COMBINE archives containing the associated SED--ML simulations (2 archives).
-\item COMBINE archives published in the literature, including normative examples from the original paper introducing COMBINE archives \cite{bergmann2014combine} shown in Fig \ref{fig:bergmann2014} (2 archives).
-\item Examples from the SED--ML Web Tools \cite{bergmann2017sed} demonstrating advanced features of SED--ML (5 archives).
-\item COMBINE archive encodings of the entire SBML test suite (1196 archives).
-\end{itemize}
-
-\begin{figure}
-  \includegraphics[width=1.0\textwidth]{fig-inline-omex.pdf}
-  \caption{Examples of Tellurium's inline OMEX format for specifying COMBINE archives. These examples start with very simple cases and build on these cases with progressively more advanced features. The first example contains a simple two--species model and simulated using a deterministic and stochastic solver. The second example shows a phase plot. The third example shows multiple stochastic traces. The fourth example shows a one--dimensional parameter scan. All of these examples are available via a Tellurium notebook, which can be accessed by clicking on ``File'' $\rightarrow$ ``Open Example Notebook'' $\rightarrow$ ``COMBINE Archive Basics'' from within the Tellurium notebook viewer. }
-  \label{fig:inlineomex}
-\end{figure}
-
-\begin{figure}
-  \includegraphics[width=\textwidth]{fig-bergmann2014.pdf}
-  \caption{ A normative example of a COMBINE archive introduced  in the original paper describing the COMBINE archive format \cite{bergmann2014combine}. This example contains the repressilator model \cite{elowitz2000synthetic}, a damped oscillation variant showing the modification of model parameters using SED--ML, and a phase plot of the undamped system. }
-  \label{fig:bergmann2014}
-\end{figure}
-
-We used the COMBINE test suite to assess the standards compliance of Tellurium Notebook. We note that the test suite can also be used by other tools to assess their compliance with standards related to COMBINE archives.
-
-\subsection*{Advanced SED--ML Support}
-
-In order to address the requirement of broad standards compliance, we tested Tellurium against the SED--ML Web Tools examples. These examples utilize the most advanced features of the SED--ML standard, and are designed to demonstrate the standard's coverage of different types of analysis. These five examples include the following features
-
-\begin{itemize}
-\item An example showing repeated runs of a stochastic simulation, overlaying the results of each run (\texttt{repeated\_stochastic\_traces.omex}).
-\item An example of scanning the steady state of a model as a function of a parameter (\texttt{repeated\_stochastic\_traces.omex}).
-\item An example showing how to represent a generalized, time--varying forcing function in SED--ML (\texttt{pulse\_experiment.omex}).
-\item A timecourse plot of different parameterizations of a model (\texttt{timecourse\_scan.omex}).
-\item A nested steady state scan, iterating over two parameters (\texttt{nested\_scan.omex}).
-\end{itemize}
-
-Fig \ref{fig:swt-roundtrip} shows the result of a round--trip procedure consisting of exporting the test cases from the SED--ML Web Tools as COMBINE archives, importing the archives into Tellurium, editing the archives in Tellurium, and re--exporting the archives to the SED--ML Web Tools. As these cases utilize advanced features, this procedure demonstrates broad compliance with SED--ML. It also demonstrates the utility of COMBINE archives for exchanging models and simulations between tools.
-
-\begin{figure}
-  \includegraphics[width=\textwidth]{swt-roundtrip.pdf}
-  \caption{Round-tripping the SED--ML Web Tools examples \cite{bergmann2017sed}. In order to demonstrate broad support for standards, we conducted a series of tests utilizing advanced usage of SED--ML. The first row shows the original example rendered in the SED--ML Web Tools. The second row shows the same example imported into Tellurium. The third row shows the simulation after editing the model in Tellurium. Finally, the fourth row shows the result of re--exporting the example to the SED--ML Web Tools using a COMBINE archive. }
-  \label{fig:swt-roundtrip}
-\end{figure}
-
-% Place tables after the first paragraph in which they are cited.
-\begin{table}[!ht]
-%\begin{adjustwidth}{-2.25in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
-\centering
-\caption{
-{\bf Tellurium SBML Test Suite Results.} }
-\begin{tabular}{l|l|l|l|}
-\hline
-{\bf Test Range} & {\bf Number Passing} & {\bf Number Failing} & {\bf Unsupported}\\ \hline %\thickhline
-  1-100  & \textbf{91} & \textbf{3} & \textbf{ 6} \\ \hline
-101-200  & \textbf{90} & \textbf{1} & \textbf{ 9} \\ \hline
-201-300  & \textbf{90} & \textbf{1} & \textbf{ 9} \\ \hline
-301-400  & \textbf{99} & \textbf{1} & \textbf{ 0} \\ \hline
-401-500  & \textbf{97} & \textbf{3} & \textbf{ 0} \\ \hline
-501-600  & \textbf{59} & \textbf{3} & \textbf{38} \\ \hline
-601-700  & \textbf{77} & \textbf{1} & \textbf{22} \\ \hline
-701-800  & \textbf{86} & \textbf{6} & \textbf{ 8} \\ \hline
-801-900  & \textbf{41} & \textbf{2} & \textbf{10} \\ \hline
-901-1000 & \textbf{41} & \textbf{2} & \textbf{57} \\ \hline
-1001-1196& \textbf{ 0} & \textbf{0} & \textbf{95} \\ \hline
-\textbf{Totals}& \textbf{816} & \textbf{25} & \textbf{254} \\ \hline
-\end{tabular}
-\begin{flushleft} The SBML test suite was converted into COMBINE archives using the provided notebook \href{https://github.com/0u812/tellurium-combine-archive-test-cases/blob/master/sbml-test-suite/convert-to-combine-arch.ipynb}{https://github.com/0u812/tellurium-combine-archive-test-cases/blob/master/sbml-test-suite/convert-to-combine-arch.ipynb}. These SBML test cases are automatiaclly converted into COMBINE archives containing the expected results, which are then converted by Tellurium into inline OMEX and simulated. A ``failed'' test refers to a case where the numeric simulation results diverge from the expected values. An ``unsupported'' test refers to a test that uses features not available in our simulator (libroadrunner) or the inline OMEX strings.
-\end{flushleft}
-\label{sbmlbenchmark}
-%\end{adjustwidth}
-\end{table}
-
-\subsection*{SBML Test Suite COMBINE Archives}
-
-The SBML Test Suite \cite{sbmltestsuite} is a collection of dynamical models along with expected trajectories designed to test software tools for compliance with the SBML standard. Each test case contains a SBML model, simulation parameters encoded in SED--ML, expected trajectories encoded as a common--separated values (CSV) file, and graphical plots for reference. We systematically converted each of these test cases into COMBINE archives containing the SBML models, SED--ML simulations, and CSV expected results and used these COMBINE archives as a benchmark for Tellurium's support for standards. The results of this benchmark are shown in Table \ref{sbmlbenchmark}.
-
-% Interoperability concerns \& test cases: include all of Frank's models \& expand upon them (especially basic models)
-
-% Three tiers:
-
-% Tier 1: simple models and simulations, Fig \ref{fig:inlineomex}
-
-% Tier 2: real--world models (Bergmann 2014 and 2017 as well as te published models notebook)
-
-% Tier 3: Hard cases, Frank's SED--ML demos (include different forcing functions in pulse demo, include different stochastic models in traces demo)
-
-% Include Stan's SBML test suite COMBINE archives here.
-
-% \begin{eqnarray}
-% \label{eq:schemeP}
-% 	\mathrm{P_Y} = \underbrace{H(Y_n) - H(Y_n|\mathbf{V}^{Y}_{n})}_{S_Y} + \underbrace{H(Y_n|\mathbf{V}^{Y}_{n})- H(Y_n|\mathbf{V}^{X,Y}_{n})}_{T_{X\rightarrow Y}},
-% \end{eqnarray}
-
-% \section*{Materials and methods}
-% \subsection*{Etiam eget sapien nibh}
+% BEGIN Stuart rev
+% \subsection*{Interoperability Concerns \& Test Cases}
 %
-% % For figure citations, please use "Fig" instead of "Figure".
-% Nulla mi mi, Fig~\ref{fig1} venenatis sed ipsum varius, volutpat euismod diam. Proin rutrum vel massa non gravida. Quisque tempor sem et dignissim rutrum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at justo vitae nulla elementum commodo eu id massa. In vitae diam ac augue semper tincidunt eu ut eros. Fusce fringilla erat porttitor lectus cursus, \nameref{S1_Video} vel sagittis arcu lobortis. Aliquam in enim semper, aliquam massa id, cursus neque. Praesent faucibus semper libero.
+% In order to achieve the exchangeability requirement of reproducibility, broad standards compliance is necessary. A small number of test cases, such as the first two case studies, is not sufficient to ensure interoperability with other software.
+% %Due to the recent introduction of the COMBINE archive specification \cite{bergmann2014combine} and supporting libraries \cite{bergmann_frank_t_2016_154158}, many tools do not yet support the standard.
+% %Unfortunately, there are few examples of COMBINE archives.
 %
-% % Place figure captions after the first paragraph in which they are cited.
-% \begin{figure}[!h]
-% \caption{{\bf Bold the figure title.}
-% Figure caption text here, please use this space for the figure panel descriptions instead of using subfigure commands. A: Lorem ipsum dolor sit amet. B: Consectetur adipiscing elit.}
-% \label{fig1}
-% \end{figure}
-
-
-%PLOS does not support heading levels beyond the 3rd (no 4th level headings).
-% \subsection*{\lorem\ and \ipsum\ nunc blandit a tortor}
-% \subsubsection*{3rd level heading}
-% Maecenas convallis mauris sit amet sem ultrices gravida. Etiam eget sapien nibh. Sed ac ipsum eget enim egestas ullamcorper nec euismod ligula. Curabitur fringilla pulvinar lectus consectetur pellentesque. Quisque augue sem, tincidunt sit amet feugiat eget, ullamcorper sed velit. Sed non aliquet felis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo justo ac dui pretium imperdiet. Sed suscipit iaculis mi at feugiat.
-
-% \begin{enumerate}
-% 	\item{react}
-% 	\item{diffuse free particles}
-% 	\item{increment time by dt and go to 1}
-% \end{enumerate}
+% We have constructed a COMBINE test suite to assess the compliance of tools with standards related to COMBINE archives. The test suite draws archives from a wide range of sources: publications \cite{bergmann2014combine,scharmf1000}, other tools (e.g. the SED--ML Web Tools \cite{bergmann2017sed}), the SBML Test Suite encoded as COMBINE archives, and archives developed by our group. The COMBINE test suite contains archives ranging from basic examples to advanced usage of the SED--ML standard. \textbf{To verify exchangeability, we have manually tested importing these archives into our software and also into the SED--ML Web Tools. The SBML test cases were too numerous to test in this way, so a subset of archives were tested with the SED--ML Web Tools whereas the full set of archives was tested with Tellurium using a Tellurium notebook \cite{sbmltsnotebook}.}
+%
+% %These tests help ensure that is broadly standards compliant. The tests may also help others to implement support for COMBINE archives. Therefore, we have collected the extensive set of COMBINE archives used for our internal testing in a repository. This repository all case studies used in this manuscript. In order to aid other tools in implementing COMBINE archive support, the test suite contains archives ranging from basic examples to advanced usage of the SED--ML standard. The test suite a combination of cases generated by us and cases derived from other tools. The test cases are available at \texttt{https://github.com/0u812/tellurium-combine-archive-test-cases} and is derived from the following sources. %All of these archives can be imported by Tellurium.
+% \textbf{The Tellurium COMBINE archive test suite is available online at GitHub \cite{catests} and is structured as follows:}
+%
+% % the way tellurium addresses the requirements, acquire model, experiment
+% % now that we know where m appears, lets explore different values of m
+% % want to modify m, tellurium supports your authoring, show you can run it, produce simulation
+% % new study, can share with other tools
+%
+% {\color{orange} MK: links to notebooks missing (this should be included as supplementary file, or via link to repository. The examples also should be packaged in tellurium.}
 %
 % \begin{itemize}
-% 	\item First bulleted item.
-% 	\item Second bulleted item.
-% 	\item Third bulleted item.
+% \item A set of models and SED--ML simulations of increasing complexity, in order to facilitate incremental support of the standard (4 archives, shown in Fig \ref{fig:inlineomex}).
+% \item A selection of BioModels converted to COMBINE archives containing the associated SED--ML simulations (2 archives).
+% \item COMBINE archives published in the literature, including normative examples from the original paper introducing COMBINE archives \cite{bergmann2014combine} shown in Fig \ref{fig:bergmann2014} (2 archives).
+% \item Examples from the SED--ML Web Tools \cite{bergmann2017sed} demonstrating advanced features of SED--ML (5 archives).
+% \item COMBINE archive encodings of the entire SBML test suite (1196 archives).
 % \end{itemize}
+%
+% \begin{figure}
+%   \includegraphics[width=1.0\textwidth]{fig-inline-omex.pdf}
+%   \caption{Examples of Tellurium's inline OMEX format for specifying COMBINE archives. These examples start with very simple cases and build on these cases with progressively more advanced features. The first example contains a simple two--species model and simulated using a deterministic and stochastic solver. The second example shows a phase plot. The third example shows multiple stochastic traces. The fourth example shows a one--dimensional parameter scan. All of these examples are available via a Tellurium notebook, which can be accessed by clicking on ``File'' $\rightarrow$ ``Open Example Notebook'' $\rightarrow$ ``COMBINE Archive Basics'' from within the Tellurium notebook viewer. }
+%   \label{fig:inlineomex}
+% \end{figure}
+%
+% \begin{figure}
+%   \includegraphics[width=\textwidth]{fig-bergmann2014.pdf}
+%   \caption{ A normative example of a COMBINE archive introduced  in the original paper describing the COMBINE archive format \cite{bergmann2014combine}. This example contains the repressilator model \cite{elowitz2000synthetic}, a damped oscillation variant showing the modification of model parameters using SED--ML, and a phase plot of the undamped system. }
+%   \label{fig:bergmann2014}
+% \end{figure}
+%
+% We used the COMBINE test suite to assess the standards compliance of Tellurium Notebook. We note that the test suite can also be used by other tools to assess their compliance with standards related to COMBINE archives.
+%
+% \subsection*{Advanced SED--ML Support}
+%
+% In order to address the requirement of broad standards compliance, we tested Tellurium against the SED--ML Web Tools examples. These examples utilize the most advanced features of the SED--ML standard, and are designed to demonstrate the standard's coverage of different types of analysis. These five examples include the following features
+%
+% \begin{itemize}
+% \item An example showing repeated runs of a stochastic simulation, overlaying the results of each run (\texttt{repeated\_stochastic\_traces.omex}).
+% \item An example of scanning the steady state of a model as a function of a parameter (\texttt{repeated\_stochastic\_traces.omex}).
+% \item An example showing how to represent a generalized, time--varying forcing function in SED--ML (\texttt{pulse\_experiment.omex}).
+% \item A timecourse plot of different parameterizations of a model (\texttt{timecourse\_scan.omex}).
+% \item A nested steady state scan, iterating over two parameters (\texttt{nested\_scan.omex}).
+% \end{itemize}
+%
+% Fig \ref{fig:swt-roundtrip} shows the result of a round--trip procedure consisting of exporting the test cases from the SED--ML Web Tools as COMBINE archives, importing the archives into Tellurium, editing the archives in Tellurium, and re--exporting the archives to the SED--ML Web Tools. As these cases utilize advanced features, this procedure demonstrates broad compliance with SED--ML. It also demonstrates the utility of COMBINE archives for exchanging models and simulations between tools.
+%
+% \begin{figure}
+%   \includegraphics[width=\textwidth]{swt-roundtrip.pdf}
+%   \caption{Round-tripping the SED--ML Web Tools examples \cite{bergmann2017sed}. In order to demonstrate broad support for standards, we conducted a series of tests utilizing advanced usage of SED--ML. The first row shows the original example rendered in the SED--ML Web Tools. The second row shows the same example imported into Tellurium. The third row shows the simulation after editing the model in Tellurium. Finally, the fourth row shows the result of re--exporting the example to the SED--ML Web Tools using a COMBINE archive. }
+%   \label{fig:swt-roundtrip}
+% \end{figure}
+%
+% % Place tables after the first paragraph in which they are cited.
+% \begin{table}[!ht]
+% %\begin{adjustwidth}{-2.25in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
+% \centering
+% \caption{
+% {\bf Tellurium SBML Test Suite Results.} }
+% \begin{tabular}{l|l|l|l|}
+% \hline
+% {\bf Test Range} & {\bf Number Passing} & {\bf Number Failing} & {\bf Unsupported}\\ \hline %\thickhline
+%   1-100  & \textbf{91} & \textbf{3} & \textbf{ 6} \\ \hline
+% 101-200  & \textbf{90} & \textbf{1} & \textbf{ 9} \\ \hline
+% 201-300  & \textbf{90} & \textbf{1} & \textbf{ 9} \\ \hline
+% 301-400  & \textbf{99} & \textbf{1} & \textbf{ 0} \\ \hline
+% 401-500  & \textbf{97} & \textbf{3} & \textbf{ 0} \\ \hline
+% 501-600  & \textbf{59} & \textbf{3} & \textbf{38} \\ \hline
+% 601-700  & \textbf{77} & \textbf{1} & \textbf{22} \\ \hline
+% 701-800  & \textbf{86} & \textbf{6} & \textbf{ 8} \\ \hline
+% 801-900  & \textbf{41} & \textbf{2} & \textbf{10} \\ \hline
+% 901-1000 & \textbf{41} & \textbf{2} & \textbf{57} \\ \hline
+% 1001-1196& \textbf{ 0} & \textbf{0} & \textbf{95} \\ \hline
+% \textbf{Totals}& \textbf{816} & \textbf{25} & \textbf{254} \\ \hline
+% \end{tabular}
+% \begin{flushleft} The SBML test suite was converted into COMBINE archives using the provided notebook \href{https://github.com/0u812/tellurium-combine-archive-test-cases/blob/master/sbml-test-suite/convert-to-combine-arch.ipynb}{https://github.com/0u812/tellurium-combine-archive-test-cases/blob/master/sbml-test-suite/convert-to-combine-arch.ipynb}. These SBML test cases are automatiaclly converted into COMBINE archives containing the expected results, which are then converted by Tellurium into inline OMEX and simulated. A ``failed'' test refers to a case where the numeric simulation results diverge from the expected values. An ``unsupported'' test refers to a test that uses features not available in our simulator (libroadrunner) or the inline OMEX strings.
+% \end{flushleft}
+% \label{sbmlbenchmark}
+% %\end{adjustwidth}
+% \end{table}
+%
+% \subsection*{SBML Test Suite COMBINE Archives}
+%
+% The SBML Test Suite \cite{sbmltestsuite} is a collection of dynamical models along with expected trajectories designed to test software tools for compliance with the SBML standard. Each test case contains a SBML model, simulation parameters encoded in SED--ML, expected trajectories encoded as a common--separated values (CSV) file, and graphical plots for reference. We systematically converted each of these test cases into COMBINE archives containing the SBML models, SED--ML simulations, and CSV expected results and used these COMBINE archives as a benchmark for Tellurium's support for standards. The results of this benchmark are shown in Table \ref{sbmlbenchmark}.
+%
+% % Interoperability concerns \& test cases: include all of Frank's models \& expand upon them (especially basic models)
+%
+% % Three tiers:
+%
+% % Tier 1: simple models and simulations, Fig \ref{fig:inlineomex}
+%
+% % Tier 2: real--world models (Bergmann 2014 and 2017 as well as te published models notebook)
+%
+% % Tier 3: Hard cases, Frank's SED--ML demos (include different forcing functions in pulse demo, include different stochastic models in traces demo)
+%
+% % Include Stan's SBML test suite COMBINE archives here.
+%
+% % \begin{eqnarray}
+% % \label{eq:schemeP}
+% % 	\mathrm{P_Y} = \underbrace{H(Y_n) - H(Y_n|\mathbf{V}^{Y}_{n})}_{S_Y} + \underbrace{H(Y_n|\mathbf{V}^{Y}_{n})- H(Y_n|\mathbf{V}^{X,Y}_{n})}_{T_{X\rightarrow Y}},
+% % \end{eqnarray}
+%
+% % \section*{Materials and methods}
+% % \subsection*{Etiam eget sapien nibh}
+% %
+% % % For figure citations, please use "Fig" instead of "Figure".
+% % Nulla mi mi, Fig~\ref{fig1} venenatis sed ipsum varius, volutpat euismod diam. Proin rutrum vel massa non gravida. Quisque tempor sem et dignissim rutrum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at justo vitae nulla elementum commodo eu id massa. In vitae diam ac augue semper tincidunt eu ut eros. Fusce fringilla erat porttitor lectus cursus, \nameref{S1_Video} vel sagittis arcu lobortis. Aliquam in enim semper, aliquam massa id, cursus neque. Praesent faucibus semper libero.
+% %
+% % % Place figure captions after the first paragraph in which they are cited.
+% % \begin{figure}[!h]
+% % \caption{{\bf Bold the figure title.}
+% % Figure caption text here, please use this space for the figure panel descriptions instead of using subfigure commands. A: Lorem ipsum dolor sit amet. B: Consectetur adipiscing elit.}
+% % \label{fig1}
+% % \end{figure}
+%
+%
+% %PLOS does not support heading levels beyond the 3rd (no 4th level headings).
+% % \subsection*{\lorem\ and \ipsum\ nunc blandit a tortor}
+% % \subsubsection*{3rd level heading}
+% % Maecenas convallis mauris sit amet sem ultrices gravida. Etiam eget sapien nibh. Sed ac ipsum eget enim egestas ullamcorper nec euismod ligula. Curabitur fringilla pulvinar lectus consectetur pellentesque. Quisque augue sem, tincidunt sit amet feugiat eget, ullamcorper sed velit. Sed non aliquet felis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo justo ac dui pretium imperdiet. Sed suscipit iaculis mi at feugiat.
+%
+% % \begin{enumerate}
+% % 	\item{react}
+% % 	\item{diffuse free particles}
+% % 	\item{increment time by dt and go to 1}
+% % \end{enumerate}
+% %
+% % \begin{itemize}
+% % 	\item First bulleted item.
+% % 	\item Second bulleted item.
+% % 	\item Third bulleted item.
+% % \end{itemize}
+
+% END Stuart rev
 
 \section*{Discussion}
 
-As an exchangeable format, SED--ML is confined to the intersection of the most common features available in dynamical modeling tools, which leaves out certain useful types of analysis (e.g. bifurcation analysis). However, the use case of SED--ML is not to serve as a replacement for current analysis methods. Instead, SED--ML is a tool to facilitate testing the dynamical behavior of models before using them. \textbf{In order for the conclusions of a research study to be valid, the models used in the study must be reliable. Using SED--ML to reproduce the dynamics of a model and compare these dynamics with expected values adds crucial value ensuring the integrity and validity of studies that reuse or expand on the model.} {\color{green} LS: 'de-risking'??  I have no idea what that might mean.} For example, while we were not able to reproduce the bifurcation analysis of the mitotic division study \cite{calzone2007dynamical} in an exchangeable format, we were able to verify the observations regarding the shift in regulatory mechanism, and in doing so gained new insight from this alternative study. At a more basic level, testing can simply refer to reproducing a simple timecourse simulation or computed steady state.
+As an exchangeable format, SED--ML is confined to the intersection of the most common features available in dynamical modeling tools, which leaves out certain useful types of analysis (e.g. bifurcation analysis). However, the use case of SED--ML is not to serve as a replacement for current analysis methods. Instead, SED--ML is a tool to facilitate testing the dynamical behavior of models before using them. In order for the conclusions of a research study to be valid, the models used in the study must be reliable. Using SED--ML to reproduce the dynamics of a model and compare these dynamics with expected values adds crucial value ensuring the integrity and validity of studies that reuse or expand on the model. For example, while we were not able to reproduce the bifurcation analysis of the mitotic division study \cite{calzone2007dynamical} in an exchangeable format, we were able to verify the observations regarding the shift in regulatory mechanism, and in doing so gained new insight from this alternative study. At a more basic level, testing can simply refer to reproducing a simple timecourse simulation or computed steady state.
 Even this simple form of dynamical testing carries immense benefits for improving the accuracy and rigor of studies utilizing dynamical models. Tellurium's support for exchangeable standards is intended to serve as a first--step in reusing a model. If the model passes these basic validation tests, subsequent steps can make use of more generalized analysis using Tellurium or some other tool.
 
 Going beyond this basic validation, it is ideal to ensure that certain model parameters and initial conditions satisfy known values. For example, the concentrations of metabolites should be within physiological limits, the copy numbers of proteins should be realistic, and known binding/dissociation constants should be respected. These constraints can change over time and most researchers will want to use their own knowledge to verify that a model respects the known values of these parameters. Finally, the researcher may wish to verify that the model reproduces certain expected behaviors. For example, if the model is expected to exhibit switch--like behavior, does this behavior occur at the correct input threshold? For models with feedback such as integral feedback control \cite{briat2016antithetic}, does the output exhibit robustness in the presence of perturbations? These types of validation require expert knowledge of the system. While there are tools and resources to help with this, the most important point for conveying this information to other researchers is to encode it as transparently and lucidly as possible using e.g. the literate notebook approach described here.
@@ -625,11 +607,9 @@ Tellurium's approach of blending standards with literate coding enables research
 
 \subsection*{Comparison with Existing Software}
 
-Many dynamical modeling tools support exchanging models via the SBML format, including COPASI \cite{hoops2006copasi,mendes2009computational}, SBW~\cite{bergmann2006sbw}, iBioSim~\cite{myers2009ibiosim}, PathwayDesigner~\cite{pathwaydesigner}, CellDesigner~\cite{Funahashi2008,Funahashi2003159}, VCell~\cite{moraru2008virtual,schaff2016rule}, CompuCell3D~\cite{swat2012multi}, PySCeS~\cite{olivier2005modelling}, BioNetGen~\cite{blinov2004bionetgen}, and PySB~\cite{lopez2013programming}. These tools have diverse feature sets and intended use cases, such as tissue modeling (CompuCell3D), rule--based modeling of molecular complexes (BioNetGen and PySB), and general modeling and simulation (all others). The tools also have different forms of user interaction, such as graphical user interfaces (COPASI and iBioSim) and graph--based network editors (CellDesigner or PathwayDesigner). Python--based tools such as PySCeS~\cite{olivier2005modelling} and PySB~\cite{lopez2013programming} can be used with a Jupyter notebook, but do not feature integration of standards with the notebook itself. In general, Tellurium's feature set makes it advantageous when the user wishes to interactively edit and test standard--encoded models and simulations or produce presentations include these models. \textbf{Tellurium notebooks can be exported as PDFs for creating high--quality publications and slides. These PDFs can be exchanged with other researchers as a way to communicate information about the study without the need for the other researchers to install Tellurium. We have incorporated custom syntax highlighting rules for Tellurium's human--readable representation of standards, thereby allowing inline OMEX cells to be rendered with the same level of clarity as Python code cells. This aids the visual clarity of exported PDFs.} %
+Many dynamical modeling tools support exchanging models via the SBML format, including COPASI \cite{hoops2006copasi,mendes2009computational}, SBW~\cite{bergmann2006sbw}, iBioSim~\cite{myers2009ibiosim}, PathwayDesigner~\cite{pathwaydesigner}, CellDesigner~\cite{Funahashi2008,Funahashi2003159}, VCell~\cite{moraru2008virtual,schaff2016rule}, CompuCell3D~\cite{swat2012multi}, PySCeS~\cite{olivier2005modelling}, BioNetGen~\cite{blinov2004bionetgen}, and PySB~\cite{lopez2013programming}. These tools have diverse feature sets and intended use cases, such as tissue modeling (CompuCell3D), rule--based modeling of molecular complexes (BioNetGen and PySB), and general modeling and simulation (all others). The tools also have different forms of user interaction, such as graphical user interfaces (COPASI and iBioSim) and graph--based network editors (CellDesigner or PathwayDesigner). Python--based tools such as PySCeS~\cite{olivier2005modelling} and PySB~\cite{lopez2013programming} can be used with a Jupyter notebook, but do not feature integration of standards with the notebook itself. In general, Tellurium's feature set makes it advantageous when the user wishes to interactively edit and test standard--encoded models and simulations or produce presentations include these models. Tellurium notebooks can be exported as PDFs for creating high--quality publications and slides. These PDFs can be exchanged with other researchers as a way to communicate information about the study without the need for the other researchers to install Tellurium. We have incorporated custom syntax highlighting rules for Tellurium's human--readable representation of standards, thereby allowing inline OMEX cells to be rendered with the same level of clarity as Python code cells. This aids the visual clarity of exported PDFs. %
 
 A unique aspect to Tellurium is that is also supports Plotly for creating interactive plots which can be visualized on the Web. With the exception of syntax highlighting for in-line OMEX cells, Tellurium notebooks can be rendered by Jupyter notebook renderers used in e.g. GitHub.
-
-{\color{orange} MK: the notebooks provide easy ways of exporting PDFs, i.e. creating reports of the simulation experiments. This should be mentioned somewhere (i.e. exchange of results with experimentators/collaborators in understandable way without the need for installing the software.}
 
 Tellurium's Python foundation makes it easy to combine with other Python--based software such as PySCeS, COBRApy \cite{ebrahim2013cobrapy}, and PySB. There are also many specialized Python packages for specific tasks such as moment closure approximation for stochastic models \cite{fan2016means}, parameter estimation \cite{Swaminathan121152}, Bayesian inference \cite{liepe2010abc}, and estimating rate laws and their parameter values \cite{Theisen065177}. Tellurium provides a convenient interface for installing packages from PyPI using the \texttt{tellurium.installPackage(`name-of-package')} function.
 
@@ -640,10 +620,10 @@ VisTrails \cite{callahan2006vistrails} is another workflow system based on visua
 Many other research software systems make use of notebooks, and some incorporate special extensions. StochSS \cite{drawert2016stochastic}, the GenePattern Notebook \cite{reich2017genepattern}, the SAGE math system \cite{erocal2010sage}, and the commercial Mathematica software \cite{wolfram1996mathematica} all utilize notebooks which are specially tailored or feature special extensions for the associated application. However, none of these approaches attempt to solve the problem we address: workflow integration featuring exchangeable standards. Our usage of the literate notebook approach is intended to satisfy two specific requirements, which are distinct from other use cases: 1) to make these standards easy for humans to read, understand, and modify, without requiring expert knowledge of the technical specifications of the standards, and 2) provide an integrated workflow which facilitates exchangeability with other software.
 
 The notebook approach used by Tellurium also has disadvantages. For example, it is difficult to use notebooks with a version control system in a meaningful way. Furthermore, large or complex analyses can be difficult to orchestrate using notebooks, as interacting with a large notebook with many cells can be cumbersome. The analysis can be broken up into smaller notebooks, but this defeats the logical ordering imposed by the notebook cells.
-{\color{orange} MK: add that you can use tellurium also as a standalone python package which allows to run more complex analysis and handle everything in git. This is mainly my workflow: prototyping and experimenting in notebooks than using the tellurium package with additional code to run the production code on the same models. This is a big advantage, because your testing and protyping is running on the same system like your production analysis. I would see this as advantage and formulate as such.}
+% {\color{orange} MK: add that you can use tellurium also as a standalone python package which allows to run more complex analysis and handle everything in git. This is mainly my workflow: prototyping and experimenting in notebooks than using the tellurium package with additional code to run the production code on the same models. This is a big advantage, because your testing and protyping is running on the same system like your production analysis. I would see this as advantage and formulate as such.}
 Nevertheless, we believe that Tellurium's approach is highly useful in certain crucial use cases, including testing models, experimenting with model variants, and as a final step in producing an analysis for other researchers in a transparent, visual presentation.
 
-\textbf{ Literate notebooks are often used for prototyping and experimenting with nascent projects. Once the project reaches a sufficient level of maturity, it usually transitions into a stage of iterated development where it is helpful to maintain detailed records of changes and to test each new iteration via a set of unit tests. In this stage, notebooks are less useful, and the project is usually stored in a versioned repository using a tool such as git \cite{gitscm}. To support this workflow, Tellurium's API can be used without the notebook viewer app by installing Tellurium via PyPI. We provide binary packages for all of Tellurium's dependencies, enabling a faster installation and obviating the need for a C compiler during installation. This added flexibility allows Tellurium to be used throughout a project's lifecycle. }
+% \textbf{ Literate notebooks are often used for prototyping and experimenting with nascent projects. Once the project reaches a sufficient level of maturity, it usually transitions into a stage of iterated development where it is helpful to maintain detailed records of changes and to test each new iteration via a set of unit tests. In this stage, notebooks are less useful, and the project is usually stored in a versioned repository using a tool such as git \cite{gitscm}. To support this workflow, Tellurium's API can be used without the notebook viewer app by installing Tellurium via PyPI. We provide binary packages for all of Tellurium's dependencies, enabling a faster installation and obviating the need for a C compiler during installation. This added flexibility allows Tellurium to be used throughout a project's lifecycle. }
 
 \section*{Conclusion}
 
@@ -651,19 +631,13 @@ In order to build larger, more complete, and more accurate dynamical models of c
 
 Tellurium integrates SBML, SED--ML, and COMBINE archives within a notebook environment, making it exceptionally easy for users to work with these standards, and obviating the need for users to understand the technical specifications of the standards. The availability of authoring tools such as Tellurium will make it possible for model repositories to begin implementing support for SED--ML and COMBINE archives. Indeed, the JWS Online repository \cite{olivier2004web} already has support for exporting COMBINE archives of models and simulations, which can be read by Tellurium. We hope that other databases will follow suit so that it will be possible to automatically extract dynamical information from model simulations.
 
-It is easy to overlook the importance of supporting exchangeable formats such as COMBINE archives, but this misses an important facet of the scientific method: the ability to independently converge on results. In our definition of reproducibility, we required that different software using different algorithms be able to converge on the same result. For example, many different algorithm implementations are available for solving systems of ODEs. The default solver used by Tellurium is CVODE \cite{cohen1996cvode}; for COPASI it is LSODA \cite{petzold1989computing}, and for iBioSim it is the Runge–Kutta–Fehlberg method. { \bf Whereas some of these tools also support multiple different solvers, no single tool can be expected to support all of them.} {\color{blue} Can't these softwares support other solvers though? RoadRunner, for example, supports RK and RKF on top of CVODE so it might be necessary to point out that there are some overlap for the sake of accuracy - KC} Exchangeable formats allow cross--validating the results of these simulation tools.
+It is easy to overlook the importance of supporting exchangeable formats such as COMBINE archives, but this misses an important facet of the scientific method: the ability to independently converge on results. In our definition of reproducibility, we required that different software using different algorithms be able to converge on the same result. For example, many different algorithm implementations are available for solving systems of ODEs. The default solver used by Tellurium is CVODE \cite{cohen1996cvode}; for COPASI it is LSODA \cite{petzold1989computing}, and for iBioSim it is the Runge–Kutta–Fehlberg method. Whereas some of these tools also support multiple different solvers, no single tool can be expected to support all of them. Exchangeable formats allow cross--validating the results of these simulation tools.
 
 % Software tends to become obsolete over time, causing files created with the software to eventually become unusable. There are still ways to defeat this system, such as if the PyPI repository is taken offline at some point, but this system offers the best guarantee possible that models and notebooks created with Tellurium will still be usable in the future.
 
 Tellurium's human--readable representation of COMBINE archives is highly important for facilitating model modification as we describe here. This feature enables researchers to experiment with models using alternate parameterizations in order to test the dynamical behavior of the models under varying conditions. We hope that this will lead to more robust models which lead to biological insight by providing predictions under a wide range of circumstances, as with the case studies presented here.
 
 \section*{Future Work}
-
-{\color{orange} MK: This is too negative. As an SED-ML editor I would like to frame this paragraph a bit more positive like
- - need for standardization/exchangability of simulation expiriments
- - SED-ML provides such a solution, but lacking behind, only subset of features
- - new solutions needed for generic simulation experiments with wide range of features, like for instance SESSL/extending SED-ML with generic scripting capabilities on simulation results (i.e. DataGenerators in SED-ML). }
-\textbf{JKM: Entire section reworked. Please let me know if this looks okay.}
 
 There is a clear need to support exchangeability of simulation experiments in order to allow researchers to build larger, better tested, and more comprehensive models. Tellurium's built--in support for exchangeability comes from the SBML and SED--ML standards. This allows Tellurium to support the widest possible range of software tools, but also prevents exchanging studies not covered by SED--ML's vocabulary of predefined simulation types. Due to delays associated with standardizing and implementing features, SED--ML tends to lag several years behind other systems which do not rely on standardization. Thus, SED--ML has the advantage of stable support from a wide range of tools, but has the disadvantage of lacking the flexibility to encode custom studies based on recent advancements in model simulation.
 

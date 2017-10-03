@@ -584,12 +584,16 @@ We wish to thank Frank Bergmann and Chris Myers for their help and guidance in d
 
 \beginsupplement
 
-\begin{figure}
-  \includegraphics[width=0.9\textwidth]{swt-fig1.pdf}
-  \includegraphics[width=0.9\textwidth]{swt-fig2.pdf}
+% \clearpage
+
+\begin{figure}[h]
+  \includegraphics[width=0.75\textwidth]{swt-fig1.pdf}
+  \includegraphics[width=0.75\textwidth]{swt-fig2.pdf}
   \caption{Demonstrating exchangeability of COMBINE archives containing SBML and SED--ML. The respiratory oscillation case study in Fig \ref{fig:hill} was exported to a COMBINE archive from Tellurium, imported into the SED--ML Web Tools \cite{bergmann2017sed}, and used to generate plots to verify that the simulation results were identical to Fig \ref{fig:hill}. The COMBINE archive used to create this example can be found online \cite{wolfhillstudy}. }
   \label{fig:swt}
 \end{figure}
+
+\clearpage
 
 \begin{figure}
   \includegraphics[width=0.9\textwidth]{wolf-ibiosim-short.pdf}
@@ -597,6 +601,8 @@ We wish to thank Frank Bergmann and Chris Myers for their help and guidance in d
   \caption{A second test of exchangeability. To demonstrate exchangeability between multiple tools, the same Hill coefficient case study as shown in Fig \ref{fig:swt} was exported to iBioSim \cite{myers2009ibiosim} and used to produce identical plots. This shows that COMBINE archives are sufficiently flexible to be exchanged between different tools, despite the limited number of tools which currently support the format. }
   \label{fig:ibiosim}
 \end{figure}
+
+\clearpage
 
 \begin{figure}
   \begin{subfigure}{0.5\textwidth}
@@ -613,11 +619,15 @@ We wish to thank Frank Bergmann and Chris Myers for their help and guidance in d
   \label{fig:swt-calzone}
 \end{figure}
 
+\clearpage
+
 \begin{figure}
   \includegraphics[width=1.0\textwidth]{fig-inline-omex.pdf}
   \caption{Examples of Tellurium's inline OMEX format for specifying COMBINE archives. These examples start with very simple cases and build on these cases with progressively more advanced features. The first example contains a simple two--species model and simulated using a deterministic and stochastic solver. The second example shows a phase plot. The third example shows multiple stochastic traces. The fourth example shows a one--dimensional parameter scan. All of these examples are available via a Tellurium notebook, which can be accessed by clicking on ``File'' $\rightarrow$ ``Open Example Notebook'' $\rightarrow$ ``COMBINE Archive Basics'' from within the Tellurium notebook viewer. }
   \label{fig:inlineomex}
 \end{figure}
+
+\clearpage
 
 \begin{figure}
   \includegraphics[width=\textwidth]{fig-bergmann2014.pdf}
@@ -625,8 +635,10 @@ We wish to thank Frank Bergmann and Chris Myers for their help and guidance in d
   \label{fig:bergmann2014}
 \end{figure}
 
+\clearpage
+
 % Place tables after the first paragraph in which they are cited.
-\begin{table}[!ht]
+\begin{table}[t]
 %\begin{adjustwidth}{-2.25in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
 \centering
 \caption{
@@ -645,8 +657,10 @@ We wish to thank Frank Bergmann and Chris Myers for their help and guidance in d
 %\end{adjustwidth}
 \end{table}
 
+\clearpage
+
 % Place tables after the first paragraph in which they are cited.
-\begin{table}[!ht]
+\begin{table}[t]
 %\begin{adjustwidth}{-2.25in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
 \centering
 \caption{
@@ -666,6 +680,8 @@ We wish to thank Frank Bergmann and Chris Myers for their help and guidance in d
 %\end{adjustwidth}
 \end{table}
 
+\clearpage
+
 % \begin{itemize}
 % \item An example showing repeated runs of a stochastic simulation, overlaying the results of each run (\texttt{repeated\_stochastic\_traces.omex}).
 % \item An example of scanning the steady state of a model as a function of a parameter (\texttt{repeated\_stochastic\_traces.omex}).
@@ -677,7 +693,7 @@ We wish to thank Frank Bergmann and Chris Myers for their help and guidance in d
 % Fig \ref{fig:swt-roundtrip} shows the result of a round--trip procedure consisting of exporting the test cases from the SED--ML Web Tools as COMBINE archives, importing the archives into Tellurium, editing the archives in Tellurium, and re--exporting the archives to the SED--ML Web Tools. As these cases utilize advanced features, this procedure demonstrates broad compliance with SED--ML. It also demonstrates the utility of COMBINE archives for exchanging models and simulations between tools.
 
 % Place tables after the first paragraph in which they are cited.
-\begin{table}[!ht]
+\begin{table}[t]
 %\begin{adjustwidth}{-2.25in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
 \centering
 \caption{
@@ -704,11 +720,15 @@ We wish to thank Frank Bergmann and Chris Myers for their help and guidance in d
 %\end{adjustwidth}
 \end{table}
 
+\clearpage
+
 \begin{figure}
   \includegraphics[width=\textwidth]{swt-roundtrip.pdf}
   \caption{Round-tripping the SED--ML Web Tools examples \cite{bergmann2017sed}. In order to demonstrate broad support for standards, we conducted a series of tests utilizing advanced usage of SED--ML. The first row shows the original example rendered in the SED--ML Web Tools. The second row shows the same example imported into Tellurium. The third row shows the simulation after editing the model in Tellurium. Finally, the fourth row shows the result of re--exporting the example to the SED--ML Web Tools using a COMBINE archive. }
   \label{fig:swt-roundtrip}
 \end{figure}
+
+\clearpage
 
 % Include only the SI item label in the paragraph heading. Use the \nameref{label} command to cite SI items in the text.
 
@@ -738,6 +758,8 @@ We wish to thank Frank Bergmann and Chris Myers for their help and guidance in d
 
 % \section*{Acknowledgments}
 % Cras egestas velit mauris, eu mollis turpis pellentesque sit amet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam id pretium nisi. Sed ac quam id nisi malesuada congue. Sed interdum aliquet augue, at pellentesque quam rhoncus vitae.
+
+\clearpage
 
 \nolinenumbers
 

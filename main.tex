@@ -308,8 +308,9 @@ SED--ML simulations and SBML / CellML models can be packaged together using COMB
 \item It must be capable of repackaging the model and/or simulation in a standard form that is usable by other tools.
 \end{enumerate}
 
-To address these requirements, we have developed a notebook environment that allows modeling studies to be exported using community standards. This workflow %, shown in Fig \ref{fig:workflow},
-provides both transparency, through a literate notebook, and exchangeability, through seamless, fluid support for standards. In what follows, we show how we have extended the literate programming concept to embrace community standards. Then, we show how this seamless connection between the notebook and standards allows users to quickly perform alternative studies using Tellurium.
+To address these requirements, we have extended the literate notebook concept used by tools like Jupyter \cite{ragan2014jupyter} to support community standards in systems biology. Whereas Jupyter notebooks contain code and narrative cells, Tellurium adds a third cell type for representing models and simulations encoded as standards. Our tool allows modeling studies to be constructed in a notebook environment and exported using community standards. This workflow %, shown in Fig \ref{fig:workflow},
+provides both transparency, through a literate notebook, and exchangeability, through seamless, fluid support for standards. %In what follows, we show how we have extended the literate programming concept to embrace community standards. Then, we show how this seamless connection between the notebook and standards allows users to quickly perform alternative studies using Tellurium.
+%Using Tellurium,   % Tellurium's notebook interface is shown in Fig \ref{fig:interface}.
 
 % For example, many models are distributed as source code containing a realization of the model as a set of numerical simulation routines, and while this does facilitate repeatability by allowing the same results to be generated again, it does not solve the concerns of reuse, expansion of existing models, and new hypothesis testing.
 
@@ -324,8 +325,6 @@ provides both transparency, through a literate notebook, and exchangeability, th
 %   \caption{A work-flow diagram for using Tellurium's reproducibility features. A COMBINE archive can contain standard encodings describing a model (encoded in SBML) and simulation (encoded in SED--ML). Tellurium converts these respective standard encodings into a human--readable form (Antimony \cite{smith2009antimony} and PhraSEDML \cite{choi2016phrased}) which are then used to run simulations and produce plots and reports. Any modifications made to the human--readable representations can be converted back to a COMBINE archive and re--exported.}
 %   \label{fig:workflow}
 % \end{figure}
-
-Using Tellurium, we have extended the literate notebook concept used by tools like Jupyter \cite{ragan2014jupyter} to support community standards in systems biology. Whereas Jupyter notebooks contain code and narrative cells, Tellurium adds a third cell type for representing models and simulations encoded as standards. % Tellurium's notebook interface is shown in Fig \ref{fig:interface}.
 
 % \begin{figure}
 %   \includegraphics[width=\textwidth]{fig-interface.png}

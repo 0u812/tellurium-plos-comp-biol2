@@ -700,14 +700,14 @@ TODO: Provide all COMBINE archives.
 \centering
 \caption{
 {\bf Advanced SED--ML Tests (Provided by SED--ML Web Tools \cite{bergmann2017sed}).} }
-\begin{tabular}{p{10cm}}
+\begin{tabular}{p{12cm}}
 \hline %\thickhline
   \texttt{repeated\_stochastic\_traces.omex}: Repeated runs of a stochastic simulation, overlaying the results of each run. \\ \hline
-  Scanning the steady state of a model as a function of a parameter (\texttt{repeated\_stochastic\_traces.omex}) \\ \hline
-  Representing a generalized, time--varying forcing function in SED--ML (\texttt{pulse\_experiment.omex}) \\ \hline
-  Generalized, time--varying forcing function in SED--ML (\texttt{pulse\_experiment.omex}) \\ \hline
-  Timecourse plot of different parameterizations of a model (\texttt{timecourse\_scan.omex}) \\ \hline
-  Nested steady state scan, iterating over two parameters (\texttt{nested\_scan.omex}) \\ \hline
+  \texttt{repeated\_stochastic\_traces.omex}: Scanning the steady state of a model as a function of a parameter. \\ \hline
+  \texttt{pulse\_experiment.omex}: Representing a generalized, time--varying forcing function in SED--ML. \\ \hline
+  \texttt{pulse\_experiment.omex}: Generalized, time--varying forcing function in SED--ML. \\ \hline
+  \texttt{timecourse\_scan.omex}: Timecourse plot of different parameterizations of a model. \\ \hline
+  \texttt{nested\_scan.omex}: Nested steady state scan, iterating over two parameters. \\ \hline
 \end{tabular}
 \begin{flushleft} The SBML test suite was converted into COMBINE archives using the provided notebook \href{https://github.com/0u812/tellurium-combine-archive-test-cases/blob/master/sbml-test-suite/convert-to-combine-arch.ipynb}{https://github.com/0u812/tellurium-combine-archive-test-cases/blob/master/sbml-test-suite/convert-to-combine-arch.ipynb}. These SBML test cases are automatiaclly converted into COMBINE archives containing the expected results, which are then converted by Tellurium into inline OMEX and simulated. A ``failed'' test refers to a case where the numeric simulation results diverge from the expected values. An ``unsupported'' test refers to a test that uses features not available in our simulator (libroadrunner) or the inline OMEX strings.
 \end{flushleft}

@@ -298,7 +298,7 @@ In order to be exchangeable and transparent, a computational experiment must be 
 
 % However, these standards do not describe how to simulate the model. This is problematic because it represents a required piece of information to reproduce the model's dynamics. As a result, model repositories such as BioModels \cite{le2006biomodels} cannot automatically be mined for dynamical information.
 
-SED--ML simulations and SBML / CellML models can be packaged together using COMBINE archives \cite{bergmann2014combine} in order to facilitate exchanging models and simulations between software tools. However, authoring tools for SED--ML and COMBINE archives are few in number \cite{bergmann2017sed,scharm2014combinearchiveweb} and require technical knowledge of SED--ML and COMBINE archives, preventing these standards from being used by the modeling community at large. Therefore an authoring tool is required with an emphasis on allowing a wider range of users to create and edit COMBINE archives containing both models and simulations. The authoring tool should satisfy five requirements:
+SED--ML simulations and SBML / CellML models can be packaged together using COMBINE archives \cite{bergmann2014combine} in order to facilitate exchanging models and simulations between software tools. However, few authoring tools exist for SED--ML and COMBINE archives \cite{bergmann2017sed,scharm2014combinearchiveweb} and require technical knowledge of standards, preventing these standards from being used by the modeling community at large. Therefore an authoring tool is required with an emphasis on allowing a wider range of users to create and edit COMBINE archives containing both models and simulations. We argue that the authoring tool should satisfy five requirements:
 
 \begin{enumerate}
 \item It should represent the models or simulation specifications in a human--readable form.
@@ -308,7 +308,7 @@ SED--ML simulations and SBML / CellML models can be packaged together using COMB
 \item It must be capable of repackaging the model and/or simulation in a standard form that is usable by other tools.
 \end{enumerate}
 
-To address these requirements, we have developed a notebook environment for dynamical modeling that allows specifications and simulation experiments to be exported using community standards. This workflow %, shown in Fig \ref{fig:workflow},
+To address these requirements, we have developed a notebook environment that allows modeling studies to be exported using community standards. This workflow %, shown in Fig \ref{fig:workflow},
 provides both transparency, through a literate notebook, and exchangeability, through seamless, fluid support for standards. In what follows, we show how we have extended the literate programming concept to embrace community standards. Then, we show how this seamless connection between the notebook and standards allows users to quickly perform alternative studies using Tellurium.
 
 % For example, many models are distributed as source code containing a realization of the model as a set of numerical simulation routines, and while this does facilitate repeatability by allowing the same results to be generated again, it does not solve the concerns of reuse, expansion of existing models, and new hypothesis testing.
@@ -448,67 +448,11 @@ The Tellurium COMBINE archive test suite is available online at GitHub \cite{cat
 \item COMBINE archive encodings of the entire SBML test suite (1196 archives).
 \end{itemize}
 
-\begin{figure}
-  \includegraphics[width=1.0\textwidth]{fig-inline-omex.pdf}
-  \caption{Examples of Tellurium's inline OMEX format for specifying COMBINE archives. These examples start with very simple cases and build on these cases with progressively more advanced features. The first example contains a simple two--species model and simulated using a deterministic and stochastic solver. The second example shows a phase plot. The third example shows multiple stochastic traces. The fourth example shows a one--dimensional parameter scan. All of these examples are available via a Tellurium notebook, which can be accessed by clicking on ``File'' $\rightarrow$ ``Open Example Notebook'' $\rightarrow$ ``COMBINE Archive Basics'' from within the Tellurium notebook viewer. }
-  \label{fig:inlineomex}
-\end{figure}
-
-\begin{figure}
-  \includegraphics[width=\textwidth]{fig-bergmann2014.pdf}
-  \caption{ A normative example of a COMBINE archive introduced  in the original paper describing the COMBINE archive format \cite{bergmann2014combine}. This example contains the repressilator model \cite{elowitz2000synthetic}, a damped oscillation variant showing the modification of model parameters using SED--ML, and a phase plot of the undamped system. }
-  \label{fig:bergmann2014}
-\end{figure}
-
 We used the COMBINE test suite to assess the standards compliance of Tellurium Notebook. We note that the test suite can also be used by other tools to assess their compliance with standards related to COMBINE archives.
 
 \subsection*{Advanced SED--ML Support}
 
-In order to address the requirement of broad standards compliance, we tested Tellurium against the SED--ML Web Tools examples. These examples utilize the most advanced features of the SED--ML standard, and are designed to demonstrate the standard's coverage of different types of analysis. These five examples include the following features
-
-\begin{itemize}
-\item An example showing repeated runs of a stochastic simulation, overlaying the results of each run (\texttt{repeated\_stochastic\_traces.omex}).
-\item An example of scanning the steady state of a model as a function of a parameter (\texttt{repeated\_stochastic\_traces.omex}).
-\item An example showing how to represent a generalized, time--varying forcing function in SED--ML (\texttt{pulse\_experiment.omex}).
-\item A timecourse plot of different parameterizations of a model (\texttt{timecourse\_scan.omex}).
-\item A nested steady state scan, iterating over two parameters (\texttt{nested\_scan.omex}).
-\end{itemize}
-
-Fig \ref{fig:swt-roundtrip} shows the result of a round--trip procedure consisting of exporting the test cases from the SED--ML Web Tools as COMBINE archives, importing the archives into Tellurium, editing the archives in Tellurium, and re--exporting the archives to the SED--ML Web Tools. As these cases utilize advanced features, this procedure demonstrates broad compliance with SED--ML. It also demonstrates the utility of COMBINE archives for exchanging models and simulations between tools.
-
-\begin{figure}
-  \includegraphics[width=\textwidth]{swt-roundtrip.pdf}
-  \caption{Round-tripping the SED--ML Web Tools examples \cite{bergmann2017sed}. In order to demonstrate broad support for standards, we conducted a series of tests utilizing advanced usage of SED--ML. The first row shows the original example rendered in the SED--ML Web Tools. The second row shows the same example imported into Tellurium. The third row shows the simulation after editing the model in Tellurium. Finally, the fourth row shows the result of re--exporting the example to the SED--ML Web Tools using a COMBINE archive. }
-  \label{fig:swt-roundtrip}
-\end{figure}
-
-% Place tables after the first paragraph in which they are cited.
-\begin{table}[!ht]
-%\begin{adjustwidth}{-2.25in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
-\centering
-\caption{
-{\bf Tellurium SBML Test Suite Results.} }
-\begin{tabular}{l|l|l|l|}
-\hline
-{\bf Test Range} & {\bf Number Passing} & {\bf Number Failing} & {\bf Unsupported}\\ \hline %\thickhline
-  1-100  & \textbf{91} & \textbf{3} & \textbf{ 6} \\ \hline
-101-200  & \textbf{90} & \textbf{1} & \textbf{ 9} \\ \hline
-201-300  & \textbf{90} & \textbf{1} & \textbf{ 9} \\ \hline
-301-400  & \textbf{99} & \textbf{1} & \textbf{ 0} \\ \hline
-401-500  & \textbf{97} & \textbf{3} & \textbf{ 0} \\ \hline
-501-600  & \textbf{59} & \textbf{3} & \textbf{38} \\ \hline
-601-700  & \textbf{77} & \textbf{1} & \textbf{22} \\ \hline
-701-800  & \textbf{86} & \textbf{6} & \textbf{ 8} \\ \hline
-801-900  & \textbf{41} & \textbf{2} & \textbf{10} \\ \hline
-901-1000 & \textbf{41} & \textbf{2} & \textbf{57} \\ \hline
-1001-1196& \textbf{ 0} & \textbf{0} & \textbf{95} \\ \hline
-\textbf{Totals}& \textbf{816} & \textbf{25} & \textbf{254} \\ \hline
-\end{tabular}
-\begin{flushleft} The SBML test suite was converted into COMBINE archives using the provided notebook \href{https://github.com/0u812/tellurium-combine-archive-test-cases/blob/master/sbml-test-suite/convert-to-combine-arch.ipynb}{https://github.com/0u812/tellurium-combine-archive-test-cases/blob/master/sbml-test-suite/convert-to-combine-arch.ipynb}. These SBML test cases are automatiaclly converted into COMBINE archives containing the expected results, which are then converted by Tellurium into inline OMEX and simulated. A ``failed'' test refers to a case where the numeric simulation results diverge from the expected values. An ``unsupported'' test refers to a test that uses features not available in our simulator (libroadrunner) or the inline OMEX strings.
-\end{flushleft}
-\label{sbmlbenchmark}
-%\end{adjustwidth}
-\end{table}
+In order to address the requirement of broad standards compliance, we tested Tellurium against a set of example simulation encodings provided by the SED--ML Web Tools \cite{bergmann2017sed}. These examples utilize advanced features of the SED--ML standard, and are designed to demonstrate the standard's coverage of different types of analysis. Table \ref{swt-examples} lists all files used in this test set, and Fig \ref{fig:swt-roundtrip} shows the results of exporting these files to Tellurium and back again.
 
 \subsection*{SBML Test Suite COMBINE Archives}
 
@@ -737,5 +681,89 @@ TODO: Provide all COMBINE archives.
 %   \caption{ Demonstrating exchangeability of the second case study. To show that the extended set of simulations from Fig \ref{fig:calzone} can be exchanged with other tools via a COMBINE archive, we exported the study in Fig \ref{fig:calzone} to the SED--ML Web Tools and verified that the plots were identical to Fig \ref{fig:calzone}. }
 %   \label{fig:swt-calzone}
 % \end{figure}
+
+\begin{figure}
+  \includegraphics[width=1.0\textwidth]{fig-inline-omex.pdf}
+  \caption{Examples of Tellurium's inline OMEX format for specifying COMBINE archives. These examples start with very simple cases and build on these cases with progressively more advanced features. The first example contains a simple two--species model and simulated using a deterministic and stochastic solver. The second example shows a phase plot. The third example shows multiple stochastic traces. The fourth example shows a one--dimensional parameter scan. All of these examples are available via a Tellurium notebook, which can be accessed by clicking on ``File'' $\rightarrow$ ``Open Example Notebook'' $\rightarrow$ ``COMBINE Archive Basics'' from within the Tellurium notebook viewer. }
+  \label{fig:inlineomex}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{fig-bergmann2014.pdf}
+  \caption{ A normative example of a COMBINE archive introduced  in the original paper describing the COMBINE archive format \cite{bergmann2014combine}. This example contains the repressilator model \cite{elowitz2000synthetic}, a damped oscillation variant showing the modification of model parameters using SED--ML, and a phase plot of the undamped system. }
+  \label{fig:bergmann2014}
+\end{figure}
+
+% Place tables after the first paragraph in which they are cited.
+\begin{table}[!ht]
+%\begin{adjustwidth}{-2.25in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
+\centering
+\caption{
+{\bf Tellurium SBML Test Suite Results.} }
+\begin{tabular}{l|l|l|l|}
+\hline
+{\bf Test Range} & {\bf Number Passing} & {\bf Number Failing} & {\bf Unsupported}\\ \hline %\thickhline
+  1-100  & \textbf{91} & \textbf{3} & \textbf{ 6} \\ \hline
+101-200  & \textbf{90} & \textbf{1} & \textbf{ 9} \\ \hline
+201-300  & \textbf{90} & \textbf{1} & \textbf{ 9} \\ \hline
+301-400  & \textbf{99} & \textbf{1} & \textbf{ 0} \\ \hline
+401-500  & \textbf{97} & \textbf{3} & \textbf{ 0} \\ \hline
+501-600  & \textbf{59} & \textbf{3} & \textbf{38} \\ \hline
+601-700  & \textbf{77} & \textbf{1} & \textbf{22} \\ \hline
+701-800  & \textbf{86} & \textbf{6} & \textbf{ 8} \\ \hline
+801-900  & \textbf{41} & \textbf{2} & \textbf{10} \\ \hline
+901-1000 & \textbf{41} & \textbf{2} & \textbf{57} \\ \hline
+1001-1196& \textbf{ 0} & \textbf{0} & \textbf{95} \\ \hline
+\textbf{Totals}& \textbf{816} & \textbf{25} & \textbf{254} \\ \hline
+\end{tabular}
+\begin{flushleft} The SBML test suite was converted into COMBINE archives using the provided notebook \href{https://github.com/0u812/tellurium-combine-archive-test-cases/blob/master/sbml-test-suite/convert-to-combine-arch.ipynb}{https://github.com/0u812/tellurium-combine-archive-test-cases/blob/master/sbml-test-suite/convert-to-combine-arch.ipynb}. These SBML test cases are automatiaclly converted into COMBINE archives containing the expected results, which are then converted by Tellurium into inline OMEX and simulated. A ``failed'' test refers to a case where the numeric simulation results diverge from the expected values. An ``unsupported'' test refers to a test that uses features not available in our simulator (libroadrunner) or the inline OMEX strings.
+\end{flushleft}
+\label{swt-examples}
+%\end{adjustwidth}
+\end{table}
+
+% \begin{itemize}
+% \item An example showing repeated runs of a stochastic simulation, overlaying the results of each run (\texttt{repeated\_stochastic\_traces.omex}).
+% \item An example of scanning the steady state of a model as a function of a parameter (\texttt{repeated\_stochastic\_traces.omex}).
+% \item An example showing how to represent a generalized, time--varying forcing function in SED--ML (\texttt{pulse\_experiment.omex}).
+% \item A timecourse plot of different parameterizations of a model (\texttt{timecourse\_scan.omex}).
+% \item A nested steady state scan, iterating over two parameters (\texttt{nested\_scan.omex}).
+% \end{itemize}
+%
+% Fig \ref{fig:swt-roundtrip} shows the result of a round--trip procedure consisting of exporting the test cases from the SED--ML Web Tools as COMBINE archives, importing the archives into Tellurium, editing the archives in Tellurium, and re--exporting the archives to the SED--ML Web Tools. As these cases utilize advanced features, this procedure demonstrates broad compliance with SED--ML. It also demonstrates the utility of COMBINE archives for exchanging models and simulations between tools.
+
+% Place tables after the first paragraph in which they are cited.
+\begin{table}[!ht]
+%\begin{adjustwidth}{-2.25in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
+\centering
+\caption{
+{\bf Tellurium SBML Test Suite Results.} }
+\begin{tabular}{l|l|l|l|}
+\hline
+{\bf Test Range} & {\bf Number Passing} & {\bf Number Failing} & {\bf Unsupported}\\ \hline %\thickhline
+  1-100  & \textbf{91} & \textbf{3} & \textbf{ 6} \\ \hline
+101-200  & \textbf{90} & \textbf{1} & \textbf{ 9} \\ \hline
+201-300  & \textbf{90} & \textbf{1} & \textbf{ 9} \\ \hline
+301-400  & \textbf{99} & \textbf{1} & \textbf{ 0} \\ \hline
+401-500  & \textbf{97} & \textbf{3} & \textbf{ 0} \\ \hline
+501-600  & \textbf{59} & \textbf{3} & \textbf{38} \\ \hline
+601-700  & \textbf{77} & \textbf{1} & \textbf{22} \\ \hline
+701-800  & \textbf{86} & \textbf{6} & \textbf{ 8} \\ \hline
+801-900  & \textbf{41} & \textbf{2} & \textbf{10} \\ \hline
+901-1000 & \textbf{41} & \textbf{2} & \textbf{57} \\ \hline
+1001-1196& \textbf{ 0} & \textbf{0} & \textbf{95} \\ \hline
+\textbf{Totals}& \textbf{816} & \textbf{25} & \textbf{254} \\ \hline
+\end{tabular}
+\begin{flushleft} The SBML test suite was converted into COMBINE archives using the provided notebook \href{https://github.com/0u812/tellurium-combine-archive-test-cases/blob/master/sbml-test-suite/convert-to-combine-arch.ipynb}{https://github.com/0u812/tellurium-combine-archive-test-cases/blob/master/sbml-test-suite/convert-to-combine-arch.ipynb}. These SBML test cases are automatiaclly converted into COMBINE archives containing the expected results, which are then converted by Tellurium into inline OMEX and simulated. A ``failed'' test refers to a case where the numeric simulation results diverge from the expected values. An ``unsupported'' test refers to a test that uses features not available in our simulator (libroadrunner) or the inline OMEX strings.
+\end{flushleft}
+\label{sbmlbenchmark}
+%\end{adjustwidth}
+\end{table}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{swt-roundtrip.pdf}
+  \caption{Round-tripping the SED--ML Web Tools examples \cite{bergmann2017sed}. In order to demonstrate broad support for standards, we conducted a series of tests utilizing advanced usage of SED--ML. The first row shows the original example rendered in the SED--ML Web Tools. The second row shows the same example imported into Tellurium. The third row shows the simulation after editing the model in Tellurium. Finally, the fourth row shows the result of re--exporting the example to the SED--ML Web Tools using a COMBINE archive. }
+  \label{fig:swt-roundtrip}
+\end{figure}
 
 \end{document}

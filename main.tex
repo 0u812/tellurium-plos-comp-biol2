@@ -357,23 +357,39 @@ Inline OMEX cells operate in much the same way as code cells, i.e. they have syn
 
 % discuss what Tellurium provides: literate programming for transparency and COMBINE archive support for exchangeability
 
-{ \color{blue}
 \section*{Design and Implementation}
 
-An authoring tool for reproducibile research requires the integration of many different technologies. The steps required to reproduce a simulation from a standard-encoded file comprise a pipeline, starting with the import of the file using a standard--supporting library. Next, the imported file must be converted into some human--readable abstraction. In Tellurium, this abstraction is a notebook cell containing a human--readable representation of SBML and SED--ML. If desired, the user can make changes to this abstraction before it is automatically re--converted into a standard format and used to perform a simulation. In Tellurium, each of these tasks is performed by a different software package:
+An authoring tool for reproducibile modeling requires the integration of many different technologies. The steps required to reproduce a simulation from a standard-encoded file comprise a workflow, starting with the import of the file using a standard--supporting library. Next, the imported file must be converted into a human--readable abstraction. Tellurium features notebook cells allow users to this human--readable representation of SBML and SED--ML. If desired, the user can make changes to the human--readable representation before it is automatically re--converted into a standard format and used to perform a simulation. Each of these tasks is performed by a different software package included in Tellurium, as shown in Table \ref{req-implementation}.
 
-\begin{itemize}
-\item \textbf{libSBML and libSEDML} \cite{hucka2003systems,waltemath2011reproducible} are used to import standard-encoded files.
-\item \textbf{Antimony and PhraSEDML} \cite{smith2009antimony,choi2016phrased} are used to convert these standard encodings to a human--readable representation.
-\item \textbf{libRoadRunner} \cite{somogyi2015libroadrunner} is used to perform simulations.
-\end{itemize}
+% \begin{itemize}
+% \item \textbf{libSBML and libSEDML} \cite{hucka2003systems,waltemath2011reproducible} are used to import standard-encoded files.
+% \item \textbf{Antimony and PhraSEDML} \cite{smith2009antimony,choi2016phrased} are used to convert these standard encodings to a human--readable representation.
+% \item \textbf{libRoadRunner} \cite{somogyi2015libroadrunner} is used to perform simulations.
+% \end{itemize}
 
-While these software libraries can, in principle, be used independently from Tellurium, they do not carry the same benefits for reproducibility when used in isolation. Without integration, a user would need to be familiar with the application programming interface (API) of each of the libraries in the pipeline above.
+\begin{table}[t]
+%\begin{adjustwidth}{-2.25in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
+\centering
+\caption{
+{\bf Requirements and Implementation.} }
+\begin{tabular}{p{5cm}|p{5cm}}
+\hline %\thickhline
+  {\bf Requirement} & {\bf Implementation} \\ \hline
+  Import of Standards & libSBML and libSEDML \\ \hline
+  Human--readable Specification of Standards & Antimony and PhraSEDML \\ \hline
+  Editable Specifications & nteract \\ \hline
+\end{tabular}
+\begin{flushleft} Integration is a major design goal of Tellurium. We show the different requirements necessary to achieve reproducibility, and the respective software libraries that provide these capabilities.
+\end{flushleft}
+\label{req-implementation}
+%\end{adjustwidth}
+\end{table}
 
-Tellurium's design is defined by three major features: providing software libraries necessary for supporting reproducibility, integration of the steps in the pipeline such that the steps can be performed automatically, and providing an interface for authoring models and visualizing the output of simulations.
+While these software libraries can, in principle, be used independently from Tellurium, they do not carry the same benefits for reproducibility when used in isolation. Without integration, a user would need to be familiar with the application programming interface (API) of each of the libraries in the workflow above.
 
-Moreover, Tellurium's notebook interface, based on the nteract app \cite{nteract} allows authoring and editing of human--readable standards in a human--readable representation and provides visualization capabilities for the resulting simulations using Plotly \cite{sievert2016plotly}.
-}
+Tellurium's design is defined by three major features: providing software libraries necessary for supporting reproducibility, integration of the steps in the workflow such that the steps can be performed automatically, and providing an interface for authoring models and visualizing the output of simulations. Table \ref{req-implementation} shows the respective software libraries that are used to perform these tasks.
+
+Moreover, Tellurium's notebook interface, based on the \textit{nteract} app \cite{nteract}, allows authoring and editing of human--readable standards in a human--readable representation and provides visualization capabilities for the resulting simulations using Plotly \cite{sievert2016plotly}.
 
 \section*{Results}
 
@@ -578,11 +594,9 @@ Tellurium integrates SBML, SED--ML, and COMBINE archives within a notebook envir
 
 Tellurium's human--readable representation of COMBINE archives is highly important for facilitating model modification as we describe here. This feature enables researchers to experiment with models using alternate parameterizations in order to test the dynamical behavior of the models under varying conditions. We hope that this will lead to more robust models which lead to biological insight by providing predictions under a wide range of circumstances, as with the case studies presented here.
 
-{ \color{blue}
 \section*{Availability and Future Directions}
 
 Tellurium Notebook is available as a standalone app (\texttt{tellurium.analogmachine.org}) or as a collection of Python packages hosted on the Python Package Index (\texttt{pypi.python.org}) for 64-bit versions of Mac OS X, Windows, and Linux. The Tellurium Python packages support Python 2.7, 3.4, 3.5, and 3.6. The notebook app comes bundled with Python 3.6 and all requisite packages. The source code of Tellurium (\texttt{github.com/sys-bio/tellurium}) is licensed under the Apache license, version 2.0. Tellurium incorporates or makes use of other software, such as \textit{nteract}, \textit{Plotly} (\texttt{http://plot.ly}), \textit{Python}, \textit{libSBML}, \textit{libSEDML}, and others, which are licensed under their respective terms. See \texttt{tellurium.analogmachine.org} for links to installation instructions, documentation (\texttt{tellurium.readthedocs.io}), and the source code (\texttt{github.com/sys-bio/tellurium}).
-}
 
 There is a clear need to support exchangeability of simulation experiments in order to allow researchers to build larger, better tested, and more comprehensive models. Tellurium's built--in support for exchangeability comes from the SBML and SED--ML standards. This allows Tellurium to support the widest possible range of software tools, but also prevents exchanging studies not covered by SED--ML's vocabulary of predefined simulation types. Due to delays associated with standardizing and implementing features, SED--ML tends to lag several years behind other systems which do not rely on standardization. Thus, SED--ML has the advantage of stable support from a wide range of tools, but has the disadvantage of lacking the flexibility to encode custom studies based on recent advancements in model simulation.
 
